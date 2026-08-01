@@ -1,3 +1,4 @@
+# import random
 from random import randint
 import string
 import os
@@ -181,3 +182,45 @@ while True:
     except ValueError:
         print("Error in input! \nPlease enter a valid number.")
         input("Press To Continue...")
+    
+    # else:
+    #     print("Enter Number Not Negative Numbers Or Text!!!")
+    #     input("Press To Continue...")
+
+
+
+    # "ABCDEFGHIKJLMNOPQRSTUVWXYZabcdefghikjlmnopqrstuvwxyz1234567890!@#$%^&*_-~"
+    # password = input("Enter The Password: ")
+
+    # password_length = input("Enter The Length Of Password: ")
+
+    # Here a problem!
+    # The this function make password more than wht user want!
+    # Fix it!
+    # print(i)
+    # password += random.choice(letters_for_password)
+
+# I Still Don't Find Solution For This Problem:(.
+# if next_id >= 1:
+#     next_id = next_id + 1
+
+# else:
+#     next_id = 1 # And Here It's The Same Problem:/.
+
+# Here Problem But I Don't What Is It:/.
+# global next_id # Here Problem But I Don't What Is It:/.
+# The Problem It's In The Zero Value:|.
+# No, The Solution Is Not In Change The Zero Value
+
+
+# Exception has occurred: UnboundLocalError
+# cannot access local variable 'next_id' where it is not associated with a value
+#   File "/media/dark-knight/وحدة تخزين جديدة/Engineer_Thinking_Challenges/Password-Vault-Manager/main.py", line 12, in add_password
+#     next_id = next_id + 1
+#               ^^^^^^^
+#   File "/media/dark-knight/وحدة تخزين جديدة/Engineer_Thinking_Challenges/Password-Vault-Manager/main.py", line 71, in <module>
+#     add_password()
+#     ~~~~~~~~~~~~^^
+# UnboundLocalError: cannot access local variable 'next_id' where it is not associated with a value
+
+

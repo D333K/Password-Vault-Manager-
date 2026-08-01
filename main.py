@@ -174,8 +174,7 @@ while True:
             clear_lines("Search Website")
             search_website(website_info)
 
-# Here a problem, when user delete a website,
-# the next_id should be decremented to avoid gaps in IDs.
+# Here a problem.
 # ex: if the user adds 2 websites and slected the delete option,
 # and when user select add or generate option,
 # the next_id will be 2 and this ID already exists and this a problem!

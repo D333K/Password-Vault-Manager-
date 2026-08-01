@@ -12,6 +12,7 @@ def print_message(message):
     '''This Method Print The Message After Operation Successfully Done.'''
     print('-' * 22)
     print(f"{message} Successfully!")
+    input("Press To Continue...")
 
 # ========================
 
@@ -46,6 +47,8 @@ def view_info(website_data):
 
         print('-' * 22)
 
+    input("Press To Continue...")
+
 # ========================
 
 def search_website(website_data): 
@@ -56,6 +59,7 @@ def search_website(website_data):
     for website in website_data:
 
         if website["ID"] == id_website:
+            print('-' * 22)
             for website_key, website_value in website.items():
                 print(f"- {website_key} : {website_value}")
 
@@ -65,6 +69,8 @@ def search_website(website_data):
 
     if not found:
         print("Sorry, ID not found.")
+
+    input("Press To Continue...")
 
 # ========================
 
@@ -89,12 +95,18 @@ def delete_website(website_data):
 
     if not found:
         print("Sorry, ID not found.")
+        input("Press To Continue...")
 
 # ========================
 
 def generate_password(website_data, id):
 
-    letters_for_password = string.ascii_letters + string.digits + "!@#$%^&*_-~" 
+    letters_for_password = (
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        "abcdefghijklmnopqrstuvwxyz"
+        "1234567890!"
+        "@#$%^&*_-~"
+        )
     password = ""
 
     website_name = input("Enter The Website: ").lower().strip()
@@ -113,6 +125,7 @@ def generate_password(website_data, id):
     }
     website_data.append(website)
 
+    print('-' * 22)
     for website_key, website_value in website.items():
             print(f"- {website_key} : {website_value}")
 
@@ -141,9 +154,7 @@ while True:
     print(" 4.Delete Website")
     print(" 5.Generate Password")
     print(" 0.Exit")
-
-    next_id += 1
-
+    
     print("_" * 12)
     UserSelection = int(input("Choose An Operation: "))
 
@@ -162,6 +173,12 @@ while True:
         elif UserSelection == 3:
             clear_lines("Search Website")
             search_website(website_info)
+
+# Here a problem, when user delete a website,
+# the next_id should be decremented to avoid gaps in IDs.
+# ex: if the user adds 2 websites and slected the delete option,
+# and when user select add or generate option,
+# the next_id will be 2 and this ID already exists and this a problem!
 
         elif UserSelection == 4:
             clear_lines("Delete Website")

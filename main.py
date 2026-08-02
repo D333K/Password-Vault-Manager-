@@ -6,8 +6,6 @@ import pyfiglet
 
 website_info = [] # Save The Password And Website And UserName Information Of User.
 
-next_id  = 0
-
 def print_message(message):
     '''This Method Print The Message After Operation Successfully Done.'''
     print('-' * 22)
@@ -16,14 +14,27 @@ def print_message(message):
 
 # ========================
 
-def add_password(website_data, id):
+def add_password(website_data):
 
     website_name = input("Enter The Website: ").lower().strip()
     password = input("Enter The Password: ").strip()
     username = input("Enter The UserName: ").strip()
 
+    counter = 0
+    found = False
+    website_id = len(website_data) + 1
+
+    for check_id in website_data:
+        counter += 1
+        if check_id["ID"] == website_id:
+            website_id = counter
+            found = True
+
+    if not found:
+        website_id = len(website_data) + 1
+
     website = {
-        "ID" : id,
+        "ID" : website_id,
         "Website" : website_name,
         "Password" : password,
         "UserName" : username,
@@ -82,8 +93,8 @@ def delete_website(website_data):
     for website in website_data:
 
         if website["ID"] == website_id:
-            for website_kye, website_value in website.items():
-                print(f"- {website_kye} : {website_value}")
+            for website_key, website_value in website.items():
+                print(f"- {website_key} : {website_value}")
 
             website_data.remove(website)
 
@@ -99,7 +110,7 @@ def delete_website(website_data):
 
 # ========================
 
-def generate_password(website_data, id):
+def generate_password(website_data):
 
     letters_for_password = (
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -112,13 +123,14 @@ def generate_password(website_data, id):
     website_name = input("Enter The Website: ").lower().strip()
     username = input("Enter The UserName: ").strip()
     password_length = int(input("Enter The Length Of Password: "))
+    website_id = len(website_data)
 
     for i in range(password_length):
         index = randint(0, len(letters_for_password) - 1)
         password += letters_for_password[index]
 
     website = {
-        "ID" : id,
+        "ID" : website_id,
         "Website" : website_name,
         "Password" : password,
         "UserName" : username,
@@ -163,8 +175,6 @@ while True:
             raise ValueError()
         elif UserSelection == 1:
             clear_lines("Add Password")
-            next_id += 1
-            add_password(website_info, next_id)
 
         elif UserSelection == 2:
             clear_lines("View All Password")
@@ -174,20 +184,13 @@ while True:
             clear_lines("Search Website")
             search_website(website_info)
 
-# Here a problem.
-# ex: if the user adds 2 websites and slected the delete option,
-# and when user select add or generate option,
-# the next_id will be 2 and this ID already exists and this a problem!
-
         elif UserSelection == 4:
             clear_lines("Delete Website")
             delete_website(website_info)
-            next_id -= 1
 
         elif UserSelection == 5:
             clear_lines("Generate Password")
-            next_id += 1
-            generate_password(website_info, next_id)
+            generate_password(website_info)
 
         elif UserSelection == 0:
             os.system("cls" if os.name == "nt" else "clear")
